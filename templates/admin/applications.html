@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Applications Overview - Placement Portal{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">All Applications</h2>
+
+<!-- Applications Table -->
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">Application Records ({{ applications|length }})</h5>
+    </div>
+    <div class="card-body">
+        {% if applications %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student</th>
+                        <th>Company</th>
+                        <th>Job Title</th>
+                        <th>Applied On</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{ application.id }}</td>
+                        <td>{{ application.student.name }}</td>
+                        <td>{{ application.drive.company.name }}</td>
+                        <td>{{ application.drive.job_title }}</td>
+                        <td>{{ application.application_date.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            {% if application.status == 'Applied' %}
+                            <span class="badge bg-info">Applied</span>
+                            {% elif application.status == 'Shortlisted' %}
+                            <span class="badge bg-primary">Shortlisted</span>
+                            {% elif application.status == 'Selected' %}
+                            <span class="badge bg-success">Selected</span>
+                            {% elif application.status == 'Rejected' %}
+                            <span class="badge bg-danger">Rejected</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted text-center">No applications found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

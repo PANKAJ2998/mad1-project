@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Placement Portal{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<!-- Statistics Cards -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Total Students</h5>
+                <h2 class="mb-0">{{ total_students }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Total Companies</h5>
+                <h2 class="mb-0">{{ total_companies }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Total Drives</h5>
+                <h2 class="mb-0">{{ total_drives }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Total Applications</h5>
+                <h2 class="mb-0">{{ total_applications }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pending Actions -->
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-danger">Pending Company Approvals</h5>
+                <h2 class="mb-0">{{ pending_companies }}</h2>
+                <a href="{{ url_for('admin.view_all_companies') }}" class="btn btn-sm btn-outline-primary mt-2">View Companies</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-danger">Pending Drive Approvals</h5>
+                <h2 class="mb-0">{{ pending_drives }}</h2>
+                <a href="{{ url_for('admin.view_all_drives') }}" class="btn btn-sm btn-outline-primary mt-2">View Drives</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Users Overview</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="usersChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Placement Activities</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="activitiesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="card mt-4 shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">Quick Actions</h5>
+    </div>
+    <div class="card-body">
+        <a href="{{ url_for('admin.view_all_companies') }}" class="btn btn-primary me-2">Manage Companies</a>
+        <a href="{{ url_for('admin.view_all_students') }}" class="btn btn-success me-2">Manage Students</a>
+        <a href="{{ url_for('admin.view_all_drives') }}" class="btn btn-info me-2">Manage Drives</a>
+        <a href="{{ url_for('admin.view_all_applications') }}" class="btn btn-warning">View Applications</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Users Chart
+    const usersCtx = document.getElementById('usersChart').getContext('2d');
+    new Chart(usersCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Students', 'Companies'],
+            datasets: [{
+                data: [{{ total_students }}, {{ total_companies }}],
+                backgroundColor: ['#0d6efd', '#198754']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // Activities Chart
+    const activitiesCtx = document.getElementById('activitiesChart').getContext('2d');
+    new Chart(activitiesCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Placement Drives', 'Applications'],
+            datasets: [{
+                label: 'Count',
+                data: [{{ total_drives }}, {{ total_applications }}],
+                backgroundColor: ['#0dcaf0', '#ffc107']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

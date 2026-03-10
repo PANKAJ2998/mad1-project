@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Create Placement Drive - Placement Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Create New Placement Drive</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('company.add_new_drive') }}">
+                    <div class="mb-3">
+                        <label for="job_title" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" id="job_title"
+                               name="job_title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="job_description" class="form-label">Job Description</label>
+                        <textarea class="form-control" id="job_description" name="job_description"
+                                  rows="5" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="eligibility" class="form-label">Eligibility Criteria</label>
+                        <textarea class="form-control" id="eligibility" name="eligibility"
+                                  rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="application_deadline" class="form-label">Application Deadline</label>
+                        <input type="date" class="form-control" id="application_deadline"
+                               name="application_deadline" required>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <small>Your placement drive will be reviewed by the admin before it becomes visible to students.</small>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('company.company_dashboard_page') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-success">Create Drive</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

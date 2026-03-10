@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Companies Management - Placement Portal{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Companies Management</h2>
+
+<!-- Search -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" action="{{ url_for('admin.view_all_companies') }}">
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="search"
+                           placeholder="Search by company name" value="{{ search_query }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Companies Table -->
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">All Companies ({{ companies|length }})</h5>
+    </div>
+    <div class="card-body">
+        {% if companies %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>HR Contact</th>
+                        <th>Website</th>
+                        <th>Status</th>
+                        <th>Registered</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.email }}</td>
+                        <td>{{ company.hr_contact }}</td>
+                        <td>
+                            {% if company.website %}
+                            <a href="{{ company.website }}" target="_blank" class="btn btn-sm btn-link">Visit</a>
+                            {% else %}
+                            N/A
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if company.is_blacklisted %}
+                            <span class="badge bg-dark">Blacklisted</span>
+                            {% elif company.approval_status == 'Pending' %}
+                            <span class="badge bg-warning">Pending</span>
+                            {% elif company.approval_status == 'Approved' %}
+                            <span class="badge bg-success">Approved</span>
+                            {% elif company.approval_status == 'Rejected' %}
+                            <span class="badge bg-danger">Rejected</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ company.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            {% if company.approval_status == 'Pending' %}
+                            <a href="{{ url_for('admin.company_approval_action', company_id=company.id) }}"
+                               class="btn btn-sm btn-success">Approve</a>
+                            <a href="{{ url_for('admin.company_rejection_action', company_id=company.id) }}"
+                               class="btn btn-sm btn-danger">Reject</a>
+                            {% endif %}
+                            <a href="{{ url_for('admin.toggle_company_blacklist', company_id=company.id) }}"
+                               class="btn btn-sm btn-dark">
+                               {% if company.is_blacklisted %}Unblacklist{% else %}Blacklist{% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted text-center">No companies found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

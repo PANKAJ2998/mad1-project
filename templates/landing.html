@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Placement Portal{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-center py-5 bg-light rounded">
+    <h1 class="display-4 fw-bold text-primary">Welcome to Placement Portal</h1>
+    <p class="lead text-muted">Connecting students with career opportunities</p>
+    <div class="mt-4">
+        <a href="{{ url_for('auth.user_login') }}" class="btn btn-primary btn-lg me-2">Login</a>
+        <a href="{{ url_for('auth.student_registration') }}" class="btn btn-outline-primary btn-lg">Register as Student</a>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section my-5">
+    <h2 class="text-center mb-4">Key Features</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <span class="badge bg-primary rounded-circle p-3" style="font-size: 2rem;">🎓</span>
+                    </div>
+                    <h5 class="card-title">For Students</h5>
+                    <p class="card-text">Browse placement drives, apply to jobs, track your application status, and manage your profile.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <span class="badge bg-success rounded-circle p-3" style="font-size: 2rem;">🏢</span>
+                    </div>
+                    <h5 class="card-title">For Companies</h5>
+                    <p class="card-text">Post placement drives, review applications, shortlist candidates, and manage recruitment process.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center shadow-sm">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <span class="badge bg-warning rounded-circle p-3" style="font-size: 2rem;">⚙️</span>
+                    </div>
+                    <h5 class="card-title">Admin Control</h5>
+                    <p class="card-text">Approve companies and drives, manage users, monitor activities, and maintain platform integrity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works Section -->
+<div class="how-it-works my-5 py-5 bg-light rounded">
+    <h2 class="text-center mb-4">How It Works</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="text-primary">For Students</h4>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Create your student account</li>
+                <li class="list-group-item">Complete your profile and upload resume</li>
+                <li class="list-group-item">Browse approved placement drives</li>
+                <li class="list-group-item">Apply to drives matching your interests</li>
+                <li class="list-group-item">Track your application status in real-time</li>
+            </ol>
+        </div>
+        <div class="col-md-6">
+            <h4 class="text-success">For Companies</h4>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Register your company on the platform</li>
+                <li class="list-group-item">Wait for admin approval</li>
+                <li class="list-group-item">Create placement drives with job details</li>
+                <li class="list-group-item">Review student applications</li>
+                <li class="list-group-item">Shortlist and select candidates</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section text-center my-5 py-4">
+    <h3>Ready to get started?</h3>
+    <p class="lead">Join our platform today and explore career opportunities</p>
+    <div class="mt-3">
+        <a href="{{ url_for('auth.student_registration') }}" class="btn btn-primary btn-lg me-2">Register as Student</a>
+        <a href="{{ url_for('auth.company_registration') }}" class="btn btn-success btn-lg">Register as Company</a>
+    </div>
+</div>
+{% endblock %}

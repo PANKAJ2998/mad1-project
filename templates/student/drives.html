@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Drives - Placement Portal{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Browse Placement Drives</h2>
+
+<!-- All Available Drives -->
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="mb-0">All Available Drives ({{ drives|length }})</h5>
+    </div>
+    <div class="card-body">
+        {% if drives %}
+        <div class="row g-4">
+            {% for drive in drives %}
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h5 class="card-title">{{ drive.job_title }}</h5>
+                                <h6 class="text-success mb-3">{{ drive.company.name }}</h6>
+
+                                <p class="mb-2"><strong>Job Description:</strong></p>
+                                <p class="text-muted">{{ drive.job_description[:200] }}...</p>
+
+                                <p class="mb-2"><strong>Eligibility:</strong></p>
+                                <p class="text-muted">{{ drive.eligibility }}</p>
+
+                                <p class="mb-0"><strong>Application Deadline:</strong>
+                                    <span class="badge bg-warning text-dark">{{ drive.application_deadline }}</span>
+                                </p>
+
+                                <p class="mt-2 mb-0"><strong>Total Applications:</strong> {{ drive.applications|length }}</p>
+                            </div>
+                            <div class="col-md-3 text-center d-flex align-items-center justify-content-center">
+                                {% if drive.id in applied_drive_ids %}
+                                <div>
+                                    <button class="btn btn-secondary btn-lg" disabled>Already Applied</button>
+                                    <p class="text-muted mt-2 mb-0"><small>Check application history for status</small></p>
+                                </div>
+                                {% else %}
+                                <a href="{{ url_for('student.apply_to_drive', drive_id=drive.id) }}"
+                                   class="btn btn-primary btn-lg"
+                                   onclick="return confirm('Are you sure you want to apply to this drive?')">
+                                   Apply Now
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-muted text-center py-5">No placement drives available at the moment. Check back later!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

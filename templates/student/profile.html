@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Update Profile - Placement Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Update Your Profile</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('student.student_profile_page') }}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               value="{{ student.name }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               value="{{ student.email }}" disabled>
+                        <small class="text-muted">Email cannot be changed</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Department</label>
+                        <input type="text" class="form-control" id="department" name="department"
+                               value="{{ student.department }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" name="phone"
+                               value="{{ student.phone }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Upload Resume</label>
+                        <input type="file" class="form-control" id="resume" name="resume"
+                               accept=".pdf,.doc,.docx">
+                        <small class="text-muted">Allowed formats: PDF, DOC, DOCX (Max 16MB)</small>
+                        {% if student.resume_filename %}
+                        <div class="mt-2">
+                            <strong>Current Resume:</strong>
+                            <a href="{{ url_for('static', filename='resumes/' + student.resume_filename) }}"
+                               target="_blank" class="btn btn-sm btn-link">View Current Resume</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('student.student_dashboard_page') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
