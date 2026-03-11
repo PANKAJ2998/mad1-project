@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('auth.show_homepage') }}">Placement Portal</a>
+            <a class="navbar-brand" href="{{ url_for('auth.homepage') }}">Placement Portal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,55 +19,55 @@
                     {% if current_user.is_authenticated %}
                         {% if current_user.__class__.__name__ == 'Admin' %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('admin.admin_dashboard_page') }}">Dashboard</a>
+                                <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('admin.view_all_companies') }}">Companies</a>
+                                <a class="nav-link" href="{{ url_for('admin.all_companies') }}">Companies</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('admin.view_all_students') }}">Students</a>
+                                <a class="nav-link" href="{{ url_for('admin.all_students') }}">Students</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('admin.view_all_drives') }}">Drives</a>
+                                <a class="nav-link" href="{{ url_for('admin.all_drives') }}">Drives</a>
                             </li>
                         {% elif current_user.__class__.__name__ == 'Company' %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('company.company_dashboard_page') }}">Dashboard</a>
+                                <a class="nav-link" href="{{ url_for('company.dashboard') }}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('company.add_new_drive') }}">Create Drive</a>
+                                <a class="nav-link" href="{{ url_for('company.create_drive') }}">Create Drive</a>
                             </li>
                         {% elif current_user.__class__.__name__ == 'Student' %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('student.student_dashboard_page') }}">Dashboard</a>
+                                <a class="nav-link" href="{{ url_for('student.dashboard') }}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('student.view_all_drives_page') }}">Browse Drives</a>
+                                <a class="nav-link" href="{{ url_for('student.all_drives') }}">Browse Drives</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('student.view_application_history') }}">My Applications</a>
+                                <a class="nav-link" href="{{ url_for('student.app_history') }}">My Applications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('student.student_profile_page') }}">Profile</a>
+                                <a class="nav-link" href="{{ url_for('student.profile') }}">Profile</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.user_logout') }}">Logout</a>
+                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.show_homepage') }}">Home</a>
+                            <a class="nav-link" href="{{ url_for('auth.homepage') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.user_login') }}">Login</a>
+                            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 Register
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ url_for('auth.student_registration') }}">As Student</a></li>
-                                <li><a class="dropdown-item" href="{{ url_for('auth.company_registration') }}">As Company</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('auth.register_student') }}">As Student</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('auth.register_company') }}">As Company</a></li>
                             </ul>
                         </li>
                     {% endif %}

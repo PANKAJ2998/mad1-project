@@ -48,7 +48,7 @@
             <div class="card-body">
                 <h5 class="card-title text-danger">Pending Company Approvals</h5>
                 <h2 class="mb-0">{{ pending_companies }}</h2>
-                <a href="{{ url_for('admin.view_all_companies') }}" class="btn btn-sm btn-outline-primary mt-2">View Companies</a>
+                <a href="{{ url_for('admin.all_companies') }}" class="btn btn-sm btn-outline-primary mt-2">View Companies</a>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
             <div class="card-body">
                 <h5 class="card-title text-danger">Pending Drive Approvals</h5>
                 <h2 class="mb-0">{{ pending_drives }}</h2>
-                <a href="{{ url_for('admin.view_all_drives') }}" class="btn btn-sm btn-outline-primary mt-2">View Drives</a>
+                <a href="{{ url_for('admin.all_drives') }}" class="btn btn-sm btn-outline-primary mt-2">View Drives</a>
             </div>
         </div>
     </div>
@@ -93,10 +93,10 @@
         <h5 class="mb-0">Quick Actions</h5>
     </div>
     <div class="card-body">
-        <a href="{{ url_for('admin.view_all_companies') }}" class="btn btn-primary me-2">Manage Companies</a>
-        <a href="{{ url_for('admin.view_all_students') }}" class="btn btn-success me-2">Manage Students</a>
-        <a href="{{ url_for('admin.view_all_drives') }}" class="btn btn-info me-2">Manage Drives</a>
-        <a href="{{ url_for('admin.view_all_applications') }}" class="btn btn-warning">View Applications</a>
+        <a href="{{ url_for('admin.all_companies') }}" class="btn btn-primary me-2">Manage Companies</a>
+        <a href="{{ url_for('admin.all_students') }}" class="btn btn-success me-2">Manage Students</a>
+        <a href="{{ url_for('admin.all_drives') }}" class="btn btn-info me-2">Manage Drives</a>
+        <a href="{{ url_for('admin.all_apps') }}" class="btn btn-warning">View Applications</a>
     </div>
 </div>
 {% endblock %}

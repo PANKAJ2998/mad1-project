@@ -10,7 +10,7 @@
                 <h4 class="mb-0">Login to Your Account</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ url_for('auth.user_login') }}">
+                <form method="POST" action="{{ url_for('auth.login') }}">
                     <div class="mb-3">
                         <label for="user_type" class="form-label">Login As</label>
                         <select class="form-select" id="user_type" name="user_type" required>
@@ -39,8 +39,8 @@
                 <hr>
                 <div class="text-center">
                     <p class="mb-0">Don't have an account?</p>
-                    <a href="{{ url_for('auth.student_registration') }}" class="btn btn-link">Register as Student</a>
-                    <a href="{{ url_for('auth.company_registration') }}" class="btn btn-link">Register as Company</a>
+                    <a href="{{ url_for('auth.register_student') }}" class="btn btn-link">Register as Student</a>
+                    <a href="{{ url_for('auth.register_company') }}" class="btn btn-link">Register as Company</a>
                 </div>
             </div>
         </div>

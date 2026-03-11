@@ -10,7 +10,7 @@
                 <h4 class="mb-0">Update Your Profile</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ url_for('student.student_profile_page') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ url_for('student.profile') }}" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name</label>
                         <input type="text" class="form-control" id="name" name="name"
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ url_for('student.student_dashboard_page') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ url_for('student.dashboard') }}" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Update Profile</button>
                     </div>
                 </form>

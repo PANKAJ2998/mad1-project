@@ -8,7 +8,7 @@
 <!-- Search -->
 <div class="card mb-4">
     <div class="card-body">
-        <form method="GET" action="{{ url_for('admin.view_all_companies') }}">
+        <form method="GET" action="{{ url_for('admin.all_companies') }}">
             <div class="row">
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="search"
@@ -71,12 +71,12 @@
                         <td>{{ company.created_at.strftime('%Y-%m-%d') }}</td>
                         <td>
                             {% if company.approval_status == 'Pending' %}
-                            <a href="{{ url_for('admin.company_approval_action', company_id=company.id) }}"
+                            <a href="{{ url_for('admin.approve_company', company_id=company.id) }}"
                                class="btn btn-sm btn-success">Approve</a>
-                            <a href="{{ url_for('admin.company_rejection_action', company_id=company.id) }}"
+                            <a href="{{ url_for('admin.reject_company', company_id=company.id) }}"
                                class="btn btn-sm btn-danger">Reject</a>
                             {% endif %}
-                            <a href="{{ url_for('admin.toggle_company_blacklist', company_id=company.id) }}"
+                            <a href="{{ url_for('admin.toggle_co_blacklist', company_id=company.id) }}"
                                class="btn btn-sm btn-dark">
                                {% if company.is_blacklisted %}Unblacklist{% else %}Blacklist{% endif %}
                             </a>
